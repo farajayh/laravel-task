@@ -14,7 +14,7 @@ class SiteFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'url' => $this->faker->url,
         ];
     }
 }

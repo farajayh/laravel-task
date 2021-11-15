@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
-use Illuminate\Auth\Events\NewPost;
-use Illuminate\Auth\Listeners\SendEmailNotification;
+use App\Events\NewPost;
+use App\Listeners\SendEmailNotification;
+
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
 

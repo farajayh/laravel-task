@@ -18,6 +18,7 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->text('content');
+            $table->unsignedBigInteger('site_id');
             $table->foreign('site_id')
                     ->references('id')
                     ->on('sites')

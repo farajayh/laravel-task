@@ -17,26 +17,12 @@ use App\Http\Controllers\UserController;
 |
 */
 
-/*Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});*/
-
 Route::group([
     'middleware' => ['api'],
     'namespace' => 'App\Http\Controllers'
 ], function(){
-    Route::post('/posts', [PostController::class, 'store']);
-    Route::post('/subscribe/{user}/{site}', [UserController::class, 'subscribe']);
-    /*Route::get('/subscribe/{user}/{site}', function ($user, $site) {
-        return response()->json([
-            'user' => $user,
-            'site' => $site
-            ], 
-        200);
-    });*/
-    Route::get('/users', function () {
-        return response()->json(['message' => 'hello'], 200);
-    });
+    Route::post('/post', [PostController::class, 'store']);
+    Route::get('/users/{user}/subscribe/{site}', [UserController::class, 'subscribe']);
 });
 
 Route::fallback(function(){

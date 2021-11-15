@@ -94,5 +94,9 @@ class UserController extends Controller
     public function subscribe(User $user, Site $site)
     {
         $user->sites()->attach($site->id);
+        return response()->json([
+            'status' => true,
+            'message' => 'User subscribed successfully'
+        ], 200);
     }
 }

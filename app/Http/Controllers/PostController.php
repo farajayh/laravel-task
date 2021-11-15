@@ -3,7 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Site;
+
+use App\Events\NewPost;
+
+use App\Console\Commands\SendEmail;
+
 use Illuminate\Http\Request;
+use Validator;
+use Artisan;
 
 class PostController extends Controller
 {
@@ -54,14 +62,23 @@ class PostController extends Controller
         $post->title = $request->title;
         $post->description = $request->description;
         $post->content = $request->content;
-        $post->site = $request->site;
+        $site = Site::find($request->site);
 
-        if ($this->site->posts()->save($post)) {
-            event (new NewPost($post));
+        if ($site->posts()->save($post)) {
+            NewPost::dispatch($post);
             return response()->json([
                     'status' => true,
                     'message'   => 'The post was created successfully',
-            ], 200);
+                    'post' => array(
+                        'id' => $post->id,
+                        'title' => $post->title,
+                        'description' =>  $post->description,
+                        'content' => $post->content,
+                        'site'=> $post->site_id,
+                        'created_at' => $post->created_at,
+                        'update_at' => $post->updated_at
+                    )
+            ], 201);
         } else {
             return response()->json([
                     'status'  => false,

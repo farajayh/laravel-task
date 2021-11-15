@@ -18,8 +18,8 @@ class PostFactory extends Factory
         return [
             'site_id' => Site::factory(),
             'title' => $this->faker->sentence,
-            'excerpt' => $this->faker->sentence,
-            'body' => $this->faker->paragraph 
+            'description' => $this->faker->sentence,
+            'content' => $this->faker->paragraph 
         ];
     }
 }
