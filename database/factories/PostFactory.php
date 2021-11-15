@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Post;
+use App\Models\Site;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PostFactory extends Factory
@@ -14,7 +16,10 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'site_id' => Site::factory(),
+            'title' => $this->faker->sentence,
+            'excerpt' => $this->faker->sentence,
+            'body' => $this->faker->paragraph 
         ];
     }
 }
